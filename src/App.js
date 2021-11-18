@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import { AddTodo } from './components/Add_todo/add_todo';
+import React from 'react';
+
 
 function App() {
+  const [inputValue, setInputValue] = React.useState('')
+  const [todos,setTodos]=React.useState([])
+  
+  function addTask () {
+    if (inputValue) {
+      const newObj = {
+        id: Date.now(),
+        title: inputValue,
+        status: false
+      }
+      setTodos([...todos,newObj])
+    }
+  } 
+
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>{inputValue}</h1>
+      <AddTodo 
+      add={addTask}
+      value={inputValue}
+      setValue={setInputValue} />
     </div>
   );
 }
